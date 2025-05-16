@@ -65,32 +65,37 @@ export default function AirportMap({
   };
 
   return (
-    <div className="h-[400px] w-full rounded-lg overflow-hidden shadow-lg border border-gray-200">
-      <MapContainer
-        center={[22.6547, 88.4467]} // CCU Airport coordinates
-        zoom={16}
-        className="h-full w-full"
+    <div className="mx-auto my-8 max-w-7xl">
+      <div
+        className="h-[400px] w-full rounded-xl overflow-hidden shadow-xl border border-gray-200 p-4 
+        bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-50
+        hover:shadow-2xl transition-shadow duration-300"
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <MapContainer
+          center={[22.6547, 88.4467]} // CCU Airport coordinates
+          zoom={16}
+          className="h-full w-full rounded-lg"
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-        {gates.map((gate) => {
-          const coords = getGateCoordinates(gate);
-          const isSelected = selectedGate?.id === gate.id;
+          {gates.map((gate) => {
+            const coords = getGateCoordinates(gate);
+            const isSelected = selectedGate?.id === gate.id;
 
-          return (
-            <Marker
-              key={gate.id}
-              position={coords}
-              eventHandlers={{
-                click: () => onGateClick(gate),
-              }}
-              icon={
-                new L.DivIcon({
-                  className: "custom-div-icon",
-                  html: `
+            return (
+              <Marker
+                key={gate.id}
+                position={coords}
+                eventHandlers={{
+                  click: () => onGateClick(gate),
+                }}
+                icon={
+                  new L.DivIcon({
+                    className: "custom-div-icon",
+                    html: `
                     <div class="
                         w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold
                         ${isSelected ? "ring-2 ring-white ring-offset-2" : ""}
@@ -99,25 +104,26 @@ export default function AirportMap({
                         ${gate.number}
                     </div>
                     `,
-                  iconSize: [24, 24],
-                })
-              }
-            >
-              <Popup>
-                <div className="p-2">
-                  <h3 className="font-bold">Gate {gate.number}</h3>
-                  <p className="text-sm">{gate.airline}</p>
-                  <p className="text-sm">
-                    {gate.flight} to {gate.destination}
-                  </p>
-                </div>
-              </Popup>
-            </Marker>
-          );
-        })}
+                    iconSize: [24, 24],
+                  })
+                }
+              >
+                <Popup>
+                  <div className="p-2">
+                    <h3 className="font-bold">Gate {gate.number}</h3>
+                    <p className="text-sm">{gate.airline}</p>
+                    <p className="text-sm">
+                      {gate.flight} to {gate.destination}
+                    </p>
+                  </div>
+                </Popup>
+              </Marker>
+            );
+          })}
 
-        <MapUpdater selectedGate={selectedGate} />
-      </MapContainer>
+          <MapUpdater selectedGate={selectedGate} />
+        </MapContainer>
+      </div>
     </div>
   );
 }
