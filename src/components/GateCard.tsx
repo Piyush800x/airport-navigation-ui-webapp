@@ -11,10 +11,7 @@ interface GateCardProps {
 
 export default function GateCard({ gate, onClick }: GateCardProps) {
   return (
-    <div
-      className="bg-white rounded-lg shadow-md border border-gray-100 p-4 transition-all duration-300 hover:shadow-lg cursor-pointer transform hover:-translate-y-1"
-      onClick={() => onClick(gate)}
-    >
+    <div className="" onClick={() => onClick(gate)}>
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2">
           <span className="text-lg font-bold">{gate.number}</span>

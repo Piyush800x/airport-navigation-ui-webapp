@@ -1,5 +1,6 @@
 import type { Gate } from "@/types/airport";
 import GateCard from "./GateCard";
+import { motion } from "framer-motion";
 
 interface GateListProps {
   gates: Gate[];
@@ -34,10 +35,33 @@ export default function GateList({ gates, onGateClick }: GateListProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.2,
+          },
+        },
+      }}
+    >
       {gates.map((gate) => (
-        <GateCard key={gate.id} gate={gate} onClick={onGateClick} />
+        <motion.div
+          key={gate.id}
+          className="bg-white rounded-lg shadow-md border border-gray-100 p-4 transition-all duration-300 hover:shadow-lg cursor-pointer transform hover:-translate-y-1"
+          onClick={() => onGateClick(gate)}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+        >
+          <GateCard gate={gate} onClick={onGateClick} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

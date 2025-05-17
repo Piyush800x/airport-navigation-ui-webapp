@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { AirportMapProps, Gate } from "@/types/airport";
 import L from "leaflet";
+import { motion } from "framer-motion";
 
 if ("_getIconUrl" in L.Icon.Default.prototype) {
   delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
@@ -67,7 +68,12 @@ export default function AirportMap({
   };
 
   return (
-    <div className="mx-auto my-8 z-0 max-w-7xl transition-all duration-300 ease-in-out animate-fade-in">
+    <motion.div
+      className="mx-auto my-8 z-0 max-w-7xl transition-all duration-300 ease-in-out"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div
         className="h-[400px] w-full rounded-xl overflow-hidden shadow-xl border border-gray-200 p-4 
         bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-50
@@ -126,6 +132,6 @@ export default function AirportMap({
           <MapUpdater selectedGate={selectedGate} />
         </MapContainer>
       </div>
-    </div>
+    </motion.div>
   );
 }

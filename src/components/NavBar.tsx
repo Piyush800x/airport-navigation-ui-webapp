@@ -2,16 +2,23 @@ import React from "react";
 import { Coffee, Clock, Plane, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 export default function NavBar() {
   return (
-    <header className="sticky top-0 z-50 bg-white border-b">
+    <motion.header
+      className="sticky top-0 z-50 bg-white border-b"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div className="container flex items-center justify-between h-16 px-4 mx-auto">
         <div className="flex items-center gap-2">
           <Plane className="w-6 h-6 text-sky-600" />
           <h1 className="text-xl font-bold">SkyWay Airport</h1>
         </div>
         <div className="flex items-center gap-4">
+          {/* Buttons */}
           <Button
             className="cursor-pointer"
             variant="ghost"
@@ -51,6 +58,6 @@ export default function NavBar() {
           </Button>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

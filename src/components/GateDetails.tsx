@@ -14,6 +14,7 @@ import {
 import type { Gate } from "@/types/airport";
 import GateStatusBadge from "./GateStatusBadge";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface GateDetailsProps {
   gate: Gate | null;
@@ -53,7 +54,13 @@ export default function GateDetails({ gate, onClose }: GateDetailsProps) {
   if (!gate) return null;
 
   return (
-    <Card className="overflow-hidden bg-white shadow-lg border transition-all duration-300 ease-in-out hover:shadow-xl animate-slide-in">
+    <motion.div
+      className="overflow-hidden bg-white shadow-lg border transition-all duration-300 ease-in-out hover:shadow-xl"
+      initial={{ x: "100%" }}
+      animate={{ x: 0 }}
+      exit={{ x: "100%" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <CardHeader className="pb-4 space-y-4">
         <div className="flex items-center gap-2">
           <Button
@@ -158,6 +165,6 @@ export default function GateDetails({ gate, onClose }: GateDetailsProps) {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </motion.div>
   );
 }
