@@ -107,6 +107,12 @@ export default function Home() {
           // Show Filters, Map, and GateList when no gate is selected
           <>
             <div className="w-full transition-all duration-300 ease-in-out">
+              <div className="flex flex-col justify-center items-center mt-4">
+                <h1 className="text-sm">You are at </h1>
+                <p className="font-bold text-2xl">
+                  Netaji Subhas Chandra Bose International Airport (CCU)
+                </p>
+              </div>
               <AirportMap
                 gates={filteredGates}
                 selectedGate={selectedGate}

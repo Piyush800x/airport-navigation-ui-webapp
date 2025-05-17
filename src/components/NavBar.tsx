@@ -36,9 +36,13 @@ export default function NavBar({ onZoomOut }: { onZoomOut: () => void }) {
             variant="ghost"
             size="sm"
             onClick={() => {
-              toast.info(
-                "You are at Netaji Subhas Chandra Bose International Airport (CCU)."
-              );
+              toast.message("Current Location", {
+                description:
+                  "Netaji Subhas Chandra Bose International Airport (CCU)",
+                icon: <MapPin className="h-5 w-5" />,
+                position: "top-center",
+                duration: 3000,
+              });
               onZoomOut();
             }}
           >

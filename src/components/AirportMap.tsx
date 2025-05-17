@@ -5,7 +5,6 @@ import "leaflet/dist/leaflet.css";
 import { AirportMapProps, Gate } from "@/types/airport";
 import L from "leaflet";
 import { motion } from "framer-motion";
-import { useRef } from "react";
 
 if ("_getIconUrl" in L.Icon.Default.prototype) {
   delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
