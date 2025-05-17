@@ -70,7 +70,7 @@ export default function GateFilters({
             placeholder="Search gates, flights, destinations..."
             value={filters.searchQuery}
             onChange={handleSearchChange}
-            className="pl-9 w-full bg-white border-gray-200 focus:ring-2 focus:ring-blue-100"
+            className="pl-9 w-full bg-white border-gray-200 focus:ring-2 focus:ring-blue-100 shadow-sm"
           />
         </div>
 

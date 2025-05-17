@@ -97,7 +97,7 @@ export default function AirportMap({
                     className: "custom-div-icon",
                     html: `
                     <div class="
-                        w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold
+                        w-6 h-6 rounded-full flex items-center justify-center text-blue-950 text-xs font-bold
                         ${isSelected ? "ring-2 ring-white ring-offset-2" : ""}
                         bg-${getMarkerColor(gate.status)}-500
                     ">
