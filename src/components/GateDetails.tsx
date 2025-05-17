@@ -55,14 +55,14 @@ export default function GateDetails({ gate, onClose }: GateDetailsProps) {
 
   return (
     <motion.div
-      className="overflow-hidden bg-white shadow-lg border transition-all duration-300 ease-in-out hover:shadow-xl"
+      className="overflow-hidden bg-white shadow-lg border transition-all duration-300 ease-in-out hover:shadow-xl rounded-lg"
       initial={{ x: "100%" }}
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.1, ease: "easeOut" }}
     >
       <CardHeader className="pb-4 space-y-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mt-4">
           <Button
             variant="ghost"
             size="sm"

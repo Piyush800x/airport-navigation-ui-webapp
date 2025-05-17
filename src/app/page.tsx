@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import GateFilters from "@/components/GateFilters";
 import GateList from "@/components/GateList";
 import GateDetails from "@/components/GateDetails";
+import { useRef } from "react";
 
 const AirportMap = dynamic(() => import("@/components/AirportMap"), {
   ssr: false,
@@ -24,6 +25,13 @@ export default function Home() {
     status: "",
     searchQuery: "",
   });
+  const mapRef = useRef<L.Map | null>(null);
+
+  const handleZoomOut = () => {
+    if (mapRef.current) {
+      mapRef.current.setView([22.6547, 88.4467], 50); // Adjust the zoom level and center
+    }
+  };
 
   const handleGateClick = (gate: Gate) => {
     setSelectedGate(gate);
@@ -77,7 +85,7 @@ export default function Home() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar onZoomOut={handleZoomOut} />
       <main className="container mx-auto px-4">
         {/* Conditional Rendering */}
         {selectedGate ? (
@@ -88,6 +96,7 @@ export default function Home() {
                 gates={filteredGates}
                 selectedGate={selectedGate}
                 onGateClick={handleGateClick}
+                onZoomOut={handleZoomOut}
               />
             </div>
             <div className="animate-slide-in mt-8">
@@ -102,6 +111,7 @@ export default function Home() {
                 gates={filteredGates}
                 selectedGate={selectedGate}
                 onGateClick={handleGateClick}
+                onZoomOut={handleZoomOut}
               />
             </div>
 

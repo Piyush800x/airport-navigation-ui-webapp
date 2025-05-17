@@ -3,8 +3,9 @@ import { Coffee, Clock, Plane, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
-export default function NavBar() {
+export default function NavBar({ onZoomOut }: { onZoomOut: () => void }) {
   return (
     <motion.header
       className="sticky top-0 z-50 bg-white border-b"
@@ -13,10 +14,10 @@ export default function NavBar() {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="container flex items-center justify-between h-16 px-4 mx-auto">
-        <div className="flex items-center gap-2">
+        <Link href={`/`} className="flex items-center gap-2">
           <Plane className="w-6 h-6 text-sky-600" />
           <h1 className="text-xl font-bold">SkyWay Airport</h1>
-        </div>
+        </Link>
         <div className="flex items-center gap-4">
           {/* Buttons */}
           <Button
@@ -38,6 +39,7 @@ export default function NavBar() {
               toast.info(
                 "You are at Netaji Subhas Chandra Bose International Airport (CCU)."
               );
+              onZoomOut();
             }}
           >
             <MapPin className="w-4 h-4 mr-2" />
