@@ -1,6 +1,8 @@
 import { Clock, MapPin, Plane, ArrowRight } from "lucide-react";
 import type { Gate } from "@/types/airport";
 import GateStatusBadge from "./GateStatusBadge";
+import Image from "next/image";
+import { airlineLogos } from "./GateDetails";
 
 interface GateCardProps {
   gate: Gate;
@@ -14,21 +16,28 @@ export default function GateCard({ gate, onClick }: GateCardProps) {
       onClick={() => onClick(gate)}
     >
       <div className="flex justify-between items-start mb-3">
-        <div className="flex items-center">
-          <span className="text-2xl font-bold text-blue-900">
-            {gate.number}
-          </span>
-          <span className="ml-2 text-sm text-gray-500">{gate.concourse}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-bold">{gate.number}</span>
+          <span className="text-sm text-gray-500">{gate.terminal}</span>
         </div>
         <GateStatusBadge status={gate.status} />
       </div>
 
-      <div className="mb-3">
-        <p className="font-semibold text-gray-800">{gate.airline}</p>
-        <div className="flex items-center text-gray-600 mt-1">
+      <div className="mb-4">
+        <div className="h-8 relative mb-2">
+          <Image
+            src={airlineLogos[gate.airline]}
+            alt={`${gate.airline} logo`}
+            className="object-contain"
+            fill
+            sizes="200px"
+            priority
+          />
+        </div>
+        <div className="flex items-center text-sm text-gray-600">
           <span className="font-medium">{gate.flight}</span>
-          <ArrowRight size={14} className="mx-2" />
-          <span className="truncate">{gate.destination}</span>
+          <ArrowRight className="h-4 w-4 mx-2" />
+          <span>{gate.destination}</span>
         </div>
       </div>
 

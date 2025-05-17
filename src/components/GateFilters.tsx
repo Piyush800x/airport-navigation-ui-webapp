@@ -6,6 +6,8 @@ import {
   getUniqueAirlines,
   getUniqueStatuses,
 } from "../data/mockData";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 interface GateFiltersProps {
   filters: FilterOptions;
@@ -52,32 +54,30 @@ export default function GateFilters({
   return (
     <div className="mb-6">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-4">
-        <div className="relative flex-grow w-full md:w-auto">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-gray-400" />
+        <div className="relative w-full mt-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search gates, flights, destinations..."
+              value={filters.searchQuery}
+              onChange={handleSearchChange}
+              className="pl-9 w-full bg-white border-gray-200 focus:ring-2 focus:ring-blue-100"
+            />
           </div>
-          <input
-            type="text"
-            placeholder="Search gates, flights, destinations..."
-            className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-            value={filters.searchQuery}
-            onChange={handleSearchChange}
-          />
         </div>
 
-        <div className="flex gap-2 items-center w-full md:w-auto justify-end">
-          <button
+        <div className="flex gap-2 items-center w-full md:w-auto justify-end mt-4">
+          <Button
+            variant={isAnyFilterActive ? "secondary" : "outline"}
+            size="sm"
             onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors ${
-              isAnyFilterActive
-                ? "bg-blue-50 text-blue-700 border-blue-200"
-                : "bg-white text-gray-700 border-gray-300"
-            }`}
+            className="gap-2 cursor-pointer"
           >
             <Filter className="h-4 w-4" />
-            <span>Filter</span>
+            Filter
             {isAnyFilterActive && (
-              <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-blue-500 rounded-full">
+              <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
                 {
                   Object.values(filters).filter(
                     (val) => val && val !== filters.searchQuery
@@ -85,16 +85,18 @@ export default function GateFilters({
                 }
               </span>
             )}
-          </button>
+          </Button>
 
           {isAnyFilterActive && (
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={resetFilters}
-              className="flex items-center gap-1 px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+              className="gap-2"
             >
               <X className="h-4 w-4" />
-              <span>Clear</span>
-            </button>
+              Clear
+            </Button>
           )}
         </div>
       </div>
