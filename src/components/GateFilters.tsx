@@ -122,7 +122,7 @@ export default function GateFilters({
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Any Terminal" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-50">
                 {terminals.map((terminal) => (
                   <SelectItem key={terminal} value={terminal}>
                     {terminal}
@@ -144,7 +144,7 @@ export default function GateFilters({
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Any Concourse" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-50">
                 {concourses.map((concourse) => (
                   <SelectItem key={concourse} value={concourse}>
                     Concourse {concourse}
@@ -166,7 +166,7 @@ export default function GateFilters({
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Any Airline" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-50">
                 {airlines.map((airline) => (
                   <SelectItem key={airline} value={airline}>
                     {airline}
@@ -188,7 +188,7 @@ export default function GateFilters({
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Any Status" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-50">
                 {statuses.map((status) => (
                   <SelectItem key={status} value={status}>
                     {status.charAt(0).toUpperCase() + status.slice(1)}

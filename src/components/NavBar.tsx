@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 export default function NavBar() {
   return (
-    <header className="sticky top-0 z-10 bg-white border-b">
+    <header className="sticky top-0 z-50 bg-white border-b">
       <div className="container flex items-center justify-between h-16 px-4 mx-auto">
         <div className="flex items-center gap-2">
           <Plane className="w-6 h-6 text-sky-600" />

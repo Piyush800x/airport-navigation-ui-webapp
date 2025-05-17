@@ -65,7 +65,7 @@ export default function AirportMap({
   };
 
   return (
-    <div className="mx-auto my-8 max-w-7xl transition-all duration-300 ease-in-out animate-fade-in">
+    <div className="mx-auto my-8 z-0 max-w-7xl transition-all duration-300 ease-in-out animate-fade-in">
       <div
         className="h-[400px] w-full rounded-xl overflow-hidden shadow-xl border border-gray-200 p-4 
         bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-50
@@ -74,7 +74,7 @@ export default function AirportMap({
         <MapContainer
           center={[22.6547, 88.4467]} // CCU Airport coordinates
           zoom={16}
-          className="h-full w-full rounded-lg"
+          className="h-full w-full rounded-lg z-0"
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
