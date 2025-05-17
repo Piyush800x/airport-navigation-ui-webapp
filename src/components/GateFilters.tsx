@@ -1,3 +1,5 @@
+"use client";
+
 import type { FilterOptions } from "@/types/airport";
 import { Filter, Search, X } from "lucide-react";
 import {
@@ -8,6 +10,13 @@ import {
 } from "../data/mockData";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface GateFiltersProps {
   filters: FilterOptions;
@@ -33,9 +42,9 @@ export default function GateFilters({
 
   const handleFilterChange = (
     filterType: keyof FilterOptions,
-    value: string
+    value: string | undefined
   ) => {
-    setFilters((prev) => ({ ...prev, [filterType]: value }));
+    setFilters((prev) => ({ ...prev, [filterType]: value ?? "" }));
   };
 
   const resetFilters = () => {
@@ -55,16 +64,14 @@ export default function GateFilters({
     <div className="mb-6">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-4">
         <div className="relative w-full mt-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="text"
-              placeholder="Search gates, flights, destinations..."
-              value={filters.searchQuery}
-              onChange={handleSearchChange}
-              className="pl-9 w-full bg-white border-gray-200 focus:ring-2 focus:ring-blue-100"
-            />
-          </div>
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="Search gates, flights, destinations..."
+            value={filters.searchQuery}
+            onChange={handleSearchChange}
+            className="pl-9 w-full bg-white border-gray-200 focus:ring-2 focus:ring-blue-100"
+          />
         </div>
 
         <div className="flex gap-2 items-center w-full md:w-auto justify-end mt-4">
@@ -102,77 +109,93 @@ export default function GateFilters({
       </div>
 
       {isFilterOpen && (
-        <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200 grid grid-cols-1 md:grid-cols-4 gap-4 animate-fadeIn">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 animate-fadeIn">
+          {/* Terminal */}
+          <div className="flex items-center gap-3">
+            <label className="w-24 text-sm font-medium text-gray-700">
               Terminal
             </label>
-            <select
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              value={filters.terminal}
-              onChange={(e) => handleFilterChange("terminal", e.target.value)}
+            <Select
+              value={filters.terminal || undefined}
+              onValueChange={(val) => handleFilterChange("terminal", val)}
             >
-              <option value="">Any Terminal</option>
-              {terminals.map((terminal) => (
-                <option key={terminal} value={terminal}>
-                  {terminal}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Any Terminal" />
+              </SelectTrigger>
+              <SelectContent>
+                {terminals.map((terminal) => (
+                  <SelectItem key={terminal} value={terminal}>
+                    {terminal}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+          {/* Concourse */}
+          <div className="flex items-center gap-3">
+            <label className="w-24 text-sm font-medium text-gray-700">
               Concourse
             </label>
-            <select
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              value={filters.concourse}
-              onChange={(e) => handleFilterChange("concourse", e.target.value)}
+            <Select
+              value={filters.concourse || undefined}
+              onValueChange={(val) => handleFilterChange("concourse", val)}
             >
-              <option value="">Any Concourse</option>
-              {concourses.map((concourse) => (
-                <option key={concourse} value={concourse}>
-                  Concourse {concourse}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Any Concourse" />
+              </SelectTrigger>
+              <SelectContent>
+                {concourses.map((concourse) => (
+                  <SelectItem key={concourse} value={concourse}>
+                    Concourse {concourse}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+          {/* Airline */}
+          <div className="flex items-center gap-3">
+            <label className="w-24 text-sm font-medium text-gray-700">
               Airline
             </label>
-            <select
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              value={filters.airline}
-              onChange={(e) => handleFilterChange("airline", e.target.value)}
+            <Select
+              value={filters.airline || undefined}
+              onValueChange={(val) => handleFilterChange("airline", val)}
             >
-              <option value="">Any Airline</option>
-              {airlines.map((airline) => (
-                <option key={airline} value={airline}>
-                  {airline}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Any Airline" />
+              </SelectTrigger>
+              <SelectContent>
+                {airlines.map((airline) => (
+                  <SelectItem key={airline} value={airline}>
+                    {airline}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+          {/* Status */}
+          <div className="flex items-center gap-3">
+            <label className="w-24 text-sm font-medium text-gray-700">
               Status
             </label>
-            <select
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              value={filters.status}
-              onChange={(e) => handleFilterChange("status", e.target.value)}
+            <Select
+              value={filters.status || undefined}
+              onValueChange={(val) => handleFilterChange("status", val)}
             >
-              <option value="">Any Status</option>
-              {statuses.map((status) => (
-                <option key={status} value={status}>
-                  {status.charAt(0).toUpperCase() + status.slice(1)}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Any Status" />
+              </SelectTrigger>
+              <SelectContent>
+                {statuses.map((status) => (
+                  <SelectItem key={status} value={status}>
+                    {status.charAt(0).toUpperCase() + status.slice(1)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
       )}
