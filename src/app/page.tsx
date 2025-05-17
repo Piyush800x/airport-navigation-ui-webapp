@@ -17,7 +17,6 @@ export default function Home() {
   const [filteredGates, setFilteredGates] = useState<Gate[]>(gates);
   const [selectedGate, setSelectedGate] = useState<Gate | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [filters, setFilters] = useState<FilterOptions>({
     terminal: "",
     concourse: "",
