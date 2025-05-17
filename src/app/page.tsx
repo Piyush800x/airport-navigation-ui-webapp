@@ -79,30 +79,9 @@ export default function Home() {
     <div>
       <NavBar />
       <main className="container mx-auto px-4">
-        <GateFilters
-          filters={filters}
-          setFilters={setFilters}
-          isFilterOpen={isFilterOpen}
-          setIsFilterOpen={setIsFilterOpen}
-        />
-
-        {/* Main Layout */}
-        {!selectedGate ? (
-          // Default view - Map on top, List below
-          <div className="flex flex-col gap-6 animate-fade-in">
-            <div className="w-full transition-all duration-300 ease-in-out">
-              <AirportMap
-                gates={filteredGates}
-                selectedGate={selectedGate}
-                onGateClick={handleGateClick}
-              />
-            </div>
-            <div className="transition-all duration-300 ease-in-out">
-              <GateList gates={filteredGates} onGateClick={handleGateClick} />
-            </div>
-          </div>
-        ) : (
-          // Selected Gate View - Map and Details side by side
+        {/* Conditional Rendering */}
+        {selectedGate ? (
+          // Show Map and GateDetails when a gate is selected
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="sticky top-20 h-[calc(100vh-8rem)] transition-all duration-300 ease-in-out animate-fade-in">
               <AirportMap
@@ -111,10 +90,32 @@ export default function Home() {
                 onGateClick={handleGateClick}
               />
             </div>
-            <div className="animate-slide-in">
+            <div className="animate-slide-in mt-8">
               <GateDetails gate={selectedGate} onClose={handleCloseDetail} />
             </div>
           </div>
+        ) : (
+          // Show Filters, Map, and GateList when no gate is selected
+          <>
+            <div className="w-full transition-all duration-300 ease-in-out">
+              <AirportMap
+                gates={filteredGates}
+                selectedGate={selectedGate}
+                onGateClick={handleGateClick}
+              />
+            </div>
+
+            <GateFilters
+              filters={filters}
+              setFilters={setFilters}
+              isFilterOpen={isFilterOpen}
+              setIsFilterOpen={setIsFilterOpen}
+            />
+
+            <div className="transition-all duration-300 ease-in-out">
+              <GateList gates={filteredGates} onGateClick={handleGateClick} />
+            </div>
+          </>
         )}
       </main>
     </div>

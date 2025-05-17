@@ -13,6 +13,7 @@ export default function NavBar() {
         </div>
         <div className="flex items-center gap-4">
           <Button
+            className="cursor-pointer"
             variant="ghost"
             size="sm"
             onClick={() => {
@@ -23,6 +24,7 @@ export default function NavBar() {
             Flight Info
           </Button>
           <Button
+            className="cursor-pointer"
             variant="ghost"
             size="sm"
             onClick={() => {
@@ -35,6 +37,7 @@ export default function NavBar() {
             Where Am I?
           </Button>
           <Button
+            className="cursor-pointer"
             variant="ghost"
             size="sm"
             onClick={() => {
